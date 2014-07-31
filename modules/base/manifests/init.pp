@@ -12,7 +12,7 @@ class base{
       source => "puppet:///modules/base/sources.list",
   }
 
-  package { "openjdk-6-jdk" :
+  package { "openjdk-7-jdk" :
     ensure => present,
     require => Exec['apt-get update']
   }
