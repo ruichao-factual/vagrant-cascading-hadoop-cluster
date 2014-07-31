@@ -4,6 +4,12 @@ class base{
   }
   exec { 'apt-get update':
     command => '/usr/bin/apt-get update',
+    require => File['/etc/apt/sources.list'],
+  }
+
+  file {
+    '/etc/apt/sources.list':
+      source => "puppet:///modules/base/sources.list",
   }
 
   package { "openjdk-6-jdk" :
@@ -15,7 +21,7 @@ class base{
     ensure => "directory",
   }
 
-  file { 
+  file {
   "/root/.ssh/config":
     source => "puppet:///modules/base/ssh_config",
     mode => 600,
@@ -46,7 +52,6 @@ class base{
     user   => "root",
     require => File['/root/.ssh/id_rsa.pub']
     }
-
 
   file { "/etc/motd":
     source => "puppet:///modules/base/motd",
